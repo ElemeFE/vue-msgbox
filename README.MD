@@ -18,8 +18,8 @@ Use callback:
 
 ```JavaScript
 MessageBox({
-  title: 'I'm a title',
-  message: 'I'm a message',
+  title: 'I\'m a title',
+  message: 'I\'m a message',
   type: 'success',
   showCancelButton: true
 }, function(action) {
