@@ -1,16 +1,16 @@
 <template>
   <div class="msgbox" v-show="visible" transition="pop-bounce">
-    <div class="msgbox-header">
+    <div class="msgbox-header" v-if="title !== ''">
       <div class="msgbox-title">{{ title }}</div>
       <div class="msgbox-close d-icon icon-close" @click="handleAction('close')"></div>
     </div>
-    <div class="msgbox-content">
+    <div class="msgbox-content" v-if="message !== ''">
       <div class="msgbox-status d-icon {{ type ? 'icon-' + type : '' }}"></div>
       <div class="msgbox-message">{{ message }}</div>
     </div>
     <div class="msgbox-btns">
-      <button class="btn btn-primary btn-lg msgbox-confirm {{confirmButtonClass}}" v-show="showConfirmButton" @click="handleAction('confirm')">{{ confirmButtonText }}</button>
-      <button class="btn btn-lg msgbox-cancel {{cancelButtonClass}}" v-show="showCancelButton" @click="handleAction('cancel')">{{ cancelButtonText }}</button>
+      <button class="msgbox-btn msgbox-cancel {{cancelButtonClass}}" v-show="showCancelButton" @click="handleAction('cancel')">{{ cancelButtonText }}</button>
+      <button class="msgbox-btn msgbox-confirm {{confirmButtonClass}}" v-show="showConfirmButton" @click="handleAction('confirm')">{{ confirmButtonText }}</button>
     </div>
   </div>
 </template>
@@ -19,21 +19,24 @@
   .msgbox {
     position: fixed;
     background-color: #fff;
-    width: 414px;
-    min-height: 220px;
+    width: 90%;
     border-radius: 3px;
+    font-size: 16px;
+    -webkit-user-select: none;
   }
 
   .msgbox-header{
     padding: 15px 20px 5px 10px;
-    border-bottom: 1px dashed #e5e5e5;
+    border-bottom: 1px solid #ddd;
   }
 
   .msgbox-content {
-    padding: 30px 20px 10px 20px;
+    padding: 20px;
     min-height: 60px;
+    position: relative;
+    border-bottom: 1px solid #ddd;
   }
-
+  
   .msgbox-close {
     display: inline-block;
     position: absolute;
@@ -83,17 +86,30 @@
   }
 
   .msgbox-btns {
-    margin: 18px 0;
+    display: -webkit-box;
+    height: 46px;
+    line-height: 46px;
     text-align: center;
+    font-size: 16px;
+  }
+  .msgbox-btn {
+    display: block;
+    background-color: #fff;
+    border: 0;
+    -webkit-box-flex: 1;
+  }
+  .msgbox-btn:active {
+    background-color: #3492e9;
+    color: #fff;
   }
 
   .msgbox-confirm {
-    min-width: 100px;
+    width: 50%;
   }
 
   .msgbox-cancel {
-    min-width: 100px;
-    margin-right: 30px;
+    width: 50%;
+    border-right: 1px solid #ddd;
   }
 </style>
 
