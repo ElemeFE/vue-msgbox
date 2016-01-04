@@ -7,6 +7,10 @@
     <div class="msgbox-content" v-if="message !== ''">
       <div class="msgbox-status d-icon {{ type ? 'icon-' + type : '' }}"></div>
       <div class="msgbox-message">{{ message }}</div>
+      <div class="msgbox-input" v-show="showInput">
+        <input type="text" v-model="inputValue" :placeholder="inputPlaceholder" />
+        <div class="msgbox-errormsg">{{inputErrorMessage}}</div>
+      </div>
     </div>
     <div class="msgbox-btns">
       <button class="msgbox-btn msgbox-cancel {{cancelButtonClass}}" v-show="showCancelButton" @click="handleAction('cancel')">{{ cancelButtonText }}</button>
@@ -47,6 +51,17 @@
     cursor: pointer;
     line-height: 20px;
     text-align: center;
+  }
+
+  .msgbox-input > input {
+    border: 1px solid #dedede;
+    border-radius: 5px;
+    padding: 4px 5px;
+    width: 100%;
+  }
+
+  .msgbox-errormsg {
+    color: red;
   }
 
   .msgbox-title {
@@ -131,14 +146,21 @@
           updatePositionOnResize: true,
           openAnimation: 'pop',
           closeDelay: 1,
-          closeOnPressEscape: true,
-          closeOnClickModal: true
+          closeOnPressEscape: true
+          // ,closeOnClickModal: true
         };
       }
     },
 
     methods: {
       handleAction(action) {
+        if (this.$type === 'prompt' && action === 'confirm') {
+          var inputPattern = this.inputPattern;
+          if (inputPattern && !inputPattern.test(this.inputValue || '')) {
+            this.inputErrorMessage = this.inputErrorMessage || '输入的数据不合法!';
+            return;
+          }
+        }
         var callback = this.callback;
         this.close();
         callback(action);
@@ -150,6 +172,11 @@
         title: '',
         message: '',
         type: '',
+        showInput: false,
+        inputValue: null,
+        inputPlaceholder: '',
+        inputPattern: null,
+        inputErrorMessage: '',
         showConfirmButton: true,
         showCancelButton: false,
         confirmButtonText: CONFIRM_TEXT,

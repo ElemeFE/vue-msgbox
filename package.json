@@ -1,6 +1,6 @@
 {
   "name": "vue-msgbox",
-  "version": "0.0.3",
+  "version": "0.1.0",
   "description": "A message box (like Sweet Alert) for vue.js.",
   "main": "lib/index.js",
   "scripts": {
@@ -25,7 +25,7 @@
   "license": "MIT",
   "peerDependencies": {
     "vue": "^1.0.10",
-    "vue-popup": "^0.0.3"
+    "vue-popup": "^0.0.5"
   },
   "devDependencies": {
     "babel-cli": "^6.3.15",
