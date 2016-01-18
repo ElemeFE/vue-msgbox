@@ -40,7 +40,7 @@
     position: relative;
     border-bottom: 1px solid #ddd;
   }
-  
+
   .msgbox-close {
     display: inline-block;
     position: absolute;
@@ -127,13 +127,13 @@
     border-right: 1px solid #ddd;
   }
 </style>
+<style src="vue-popup/lib/popup.css"></style>
 
 <script type="text/ecmascript-6" lang="babel">
   var CONFIRM_TEXT = '确定';
   var CANCEL_TEXT = '取消';
 
   import Popup from 'vue-popup';
-  require('vue-popup/lib/popup.css');
 
   export default {
     mixins: [ Popup ],

@@ -19,6 +19,7 @@ var defaults = {
 };
 
 import Vue from 'vue';
+import msgboxVue from './msgbox.vue';
 
 var merge = function(target) {
   for (var i = 1, j = arguments.length; i < j; i++) {
@@ -36,7 +37,7 @@ var merge = function(target) {
   return target;
 };
 
-var MessageBoxConstructor = Vue.extend(require('./msgbox.vue'));
+var MessageBoxConstructor = Vue.extend(msgboxVue);
 
 var currentMsg, instance;
 var msgQueue = [];
@@ -185,3 +186,4 @@ MessageBox.close = function() {
 };
 
 export default MessageBox;
+export { MessageBox };
