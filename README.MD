@@ -108,7 +108,7 @@ MessageBox.prompt(message, title, options);
 ```
 
 ```JavaScript
-MessageBox.prompt('message').then(function(value, cation) {
+MessageBox.prompt('message').then(function(value, action) {
   ...
 });
 ```

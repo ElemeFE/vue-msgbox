@@ -161,6 +161,7 @@
             return;
           }
         }
+        this.inputErrorMessage = '';
         var callback = this.callback;
         this.close();
         callback(action);
