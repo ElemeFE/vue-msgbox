@@ -2,10 +2,37 @@
 
 vue-msgbox is a message box (like Sweet Alert) for vue.js.
 
-# Import
+# Install
+
+Get source from npm.
+
+```bash
+$ npm install vue-msgbox --save
+```
+
+Supported UMD library and individual css file.
+
+```bash
+./lib/
+├── vue-msgbox.js
+└── vue-msgbox.css
+./src/
+├── index.js
+└── msgbox.vue
+```
 
 ```JavaScript
+// For ES6 module
 import MessageBox from 'vue-msgbox';
+
+// For commonJS
+const MessageBox = require('vue-msgbox').default;
+
+// For global variable, import from script label, then
+const MessageBox = VueMsgbox.default;
+
+// Import from src code for debugging or self building
+import MessageBox from 'vue-msgbox/src';
 ```
 
 # Usage
@@ -81,7 +108,7 @@ MessageBox.prompt(message, title, options);
 ```
 
 ```JavaScript
-MessageBox.prompt('message').then(function(value, cation) {
+MessageBox.prompt('message').then(function(value, action) {
   ...
 });
 ```
@@ -104,6 +131,20 @@ MessageBox.prompt('message').then(function(value, cation) {
 | inputPlaceholder | placeholder of input. |
 | inputPattern | Regexp(default null). validation pattern of input. |
 | inputErrorMessage | error message when inputPattern test inputValue failed. |
+
+# Develop
+
+Coding with watching and hot-reload.
+
+```bash
+$ npm run dev
+```
+
+Develop on real remote device.
+
+```bash
+$ npm run remote-dev {{ YOUR IP ADDRESS }}
+```
 
 # License
 MIT
