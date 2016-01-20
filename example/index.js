@@ -63,6 +63,7 @@ document.querySelector('[showprompt2]').addEventListener('click', () => {
   MessageBox.prompt('Input your name: ', '', {
       inputPlaceholder: '2-12 words',
       inputValue: 'name',
+      confirmButtonPosition: 'left',
       inputValidator(value) {
         if (value.length < 2 || value.length > 12) {
           return 'length should be 2-12'

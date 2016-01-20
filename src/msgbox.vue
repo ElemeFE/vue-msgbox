@@ -103,7 +103,7 @@
   }
 
   .msgbox-btns {
-    display: flex;
+    display: -webkit-box;
     height: 40px;
     line-height: 40px;
     text-align: center;
@@ -138,7 +138,7 @@
   }
 
   .msgbox-btns-reverse {
-    flex-flow: row-reverse;
+    -webkit-box-direction: reverse;
   }
 
   .msgbox-btns-reverse .msgbox-confirm {
