@@ -9,7 +9,7 @@
       <div class="msgbox-message">{{ message }}</div>
       <div class="msgbox-input" v-show="showInput">
         <input type="text" v-model="inputValue" :placeholder="inputPlaceholder" />
-        <div class="msgbox-errormsg" :style="{{ visibility: !!editorErrorMessage ? 'visible' : 'hidden' }}">{{editorErrorMessage}}</div>
+        <div class="msgbox-errormsg" :style="{ visibility: !!editorErrorMessage ? 'visible' : 'hidden' }">{{editorErrorMessage}}</div>
       </div>
     </div>
     <div class="msgbox-btns" :class="{ 'msgbox-btns-reverse': confirmButtonPosition === 'left' }">
