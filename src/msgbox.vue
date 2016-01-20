@@ -2,19 +2,19 @@
   <div class="msgbox" v-show="visible" transition="pop-bounce">
     <div class="msgbox-header" v-if="title !== ''">
       <div class="msgbox-title">{{ title }}</div>
-      <div class="msgbox-close d-icon icon-close" @click="handleAction('close')"></div>
+      <!--<div class="msgbox-close d-icon icon-close" @click="handleAction('close')"></div>-->
     </div>
     <div class="msgbox-content" v-if="message !== ''">
       <div class="msgbox-status d-icon {{ type ? 'icon-' + type : '' }}"></div>
       <div class="msgbox-message">{{ message }}</div>
       <div class="msgbox-input" v-show="showInput">
         <input type="text" v-model="inputValue" :placeholder="inputPlaceholder" />
-        <div class="msgbox-errormsg">{{inputErrorMessage}}</div>
+        <div class="msgbox-errormsg" :style="{{ visibility: !!editorErrorMessage ? 'visible' : 'hidden' }}">{{editorErrorMessage}}</div>
       </div>
     </div>
-    <div class="msgbox-btns">
-      <button class="msgbox-btn msgbox-cancel {{cancelButtonClass}}" v-show="showCancelButton" @click="handleAction('cancel')">{{ cancelButtonText }}</button>
-      <button class="msgbox-btn msgbox-confirm {{confirmButtonClass}}" v-show="showConfirmButton" @click="handleAction('confirm')">{{ confirmButtonText }}</button>
+    <div class="msgbox-btns" :class="{ 'msgbox-btns-reverse': confirmButtonPosition === 'left' }">
+      <button class="{{ cancelButtonClasses }}" v-show="showCancelButton" @click="handleAction('cancel')">{{ cancelButtonText }}</button>
+      <button class="{{ confirmButtonClasses }}" v-show="showConfirmButton" @click="handleAction('confirm')">{{ confirmButtonText }}</button>
     </div>
   </div>
 </template>
@@ -35,8 +35,8 @@
   }
 
   .msgbox-content {
-    padding: 20px;
-    min-height: 60px;
+    padding: 10px 20px;
+    min-height: 36px;
     position: relative;
     border-bottom: 1px solid #ddd;
   }
@@ -62,6 +62,8 @@
 
   .msgbox-errormsg {
     color: red;
+    font-size: 12px;
+    min-height: 16px;
   }
 
   .msgbox-title {
@@ -101,17 +103,20 @@
   }
 
   .msgbox-btns {
-    display: -webkit-box;
-    height: 46px;
-    line-height: 46px;
+    display: flex;
+    height: 40px;
+    line-height: 40px;
     text-align: center;
     font-size: 16px;
   }
+
   .msgbox-btn {
     display: block;
     background-color: #fff;
     border: 0;
     -webkit-box-flex: 1;
+    margin: 0;
+    border-radius: 0;
   }
   .msgbox-btn:active {
     background-color: #3492e9;
@@ -125,6 +130,23 @@
   .msgbox-cancel {
     width: 50%;
     border-right: 1px solid #ddd;
+  }
+
+  .msgbox-confirm-highlight,
+  .msgbox-cancel-highlight {
+    font-weight: 800;
+  }
+
+  .msgbox-btns-reverse {
+    flex-flow: row-reverse;
+  }
+
+  .msgbox-btns-reverse .msgbox-confirm {
+    border-right: 1px solid #ddd;
+  }
+
+  .msgbox-btns-reverse .msgbox-cancel {
+    border-right: 0;
   }
 </style>
 <style src="vue-popup/lib/popup.css"></style>
@@ -149,22 +171,63 @@
           closeOnPressEscape: true
           // ,closeOnClickModal: true
         };
+      },
+      confirmButtonClasses() {
+        var classes = 'msgbox-btn msgbox-confirm ' + this.confirmButtonClass;
+        if (this.confirmButtonHighlight) {
+          classes += ' msgbox-confirm-highlight';
+        }
+        return classes;
+      },
+      cancelButtonClasses() {
+        var classes = 'msgbox-btn msgbox-cancel ' + this.confirmButtonClass;
+        if (this.cancelButtonHighlight) {
+          classes += ' msgbox-cancel-highlight';
+        }
+        return classes;
       }
     },
 
     methods: {
       handleAction(action) {
-        if (this.$type === 'prompt' && action === 'confirm') {
-          var inputPattern = this.inputPattern;
-          if (inputPattern && !inputPattern.test(this.inputValue || '')) {
-            this.inputErrorMessage = this.inputErrorMessage || '输入的数据不合法!';
-            return;
-          }
+        if (this.$type === 'prompt' && action === 'confirm' && !this.validate()) {
+          return;
         }
-        this.inputErrorMessage = '';
         var callback = this.callback;
         this.close();
         callback(action);
+      },
+
+      validate() {
+        if (this.$type === 'prompt') {
+          var inputPattern = this.inputPattern;
+          if (inputPattern && !inputPattern.test(this.inputValue || '')) {
+            this.editorErrorMessage = this.inputErrorMessage || '输入的数据不合法!';
+            return false;
+          }
+          var inputValidator = this.inputValidator;
+          if (typeof inputValidator === 'function') {
+            var validateResult = inputValidator(this.inputValue);
+            if (validateResult === false) {
+              this.editorErrorMessage = this.inputErrorMessage || '输入的数据不合法!';
+              return false;
+            }
+            if (typeof validateResult === 'string') {
+              this.editorErrorMessage = validateResult;
+              return false;
+            }
+          }
+        }
+        this.editorErrorMessage = '';
+        return true;
+      }
+    },
+
+    watch: {
+      inputValue() {
+        if (this.$type === 'prompt') {
+          this.validate();
+        }
       }
     },
 
@@ -177,15 +240,20 @@
         inputValue: null,
         inputPlaceholder: '',
         inputPattern: null,
+        inputValidator: null,
         inputErrorMessage: '',
         showConfirmButton: true,
         showCancelButton: false,
         confirmButtonText: CONFIRM_TEXT,
         cancelButtonText: CANCEL_TEXT,
+        confirmButtonPosition: 'right',
+        confirmButtonHighlight: false,
         confirmButtonClass: '',
         confirmButtonDisabled: false,
         cancelButtonClass: '',
+        cancelButtonHighlight: false,
 
+        editorErrorMessage: null,
         callback: null
       };
     }

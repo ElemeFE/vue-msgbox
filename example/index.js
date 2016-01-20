@@ -15,7 +15,7 @@ document.querySelector('[showbase]').addEventListener('click', () => {
     showCancelButton: true
   }, function(action) {
     console.log('callback:', action);
-    MessageBox('Clicked: ' + action);
+    MessageBox.alert('Clicked: ' + action);
   });
 });
 
@@ -27,7 +27,7 @@ document.querySelector('[showpromisebase]').addEventListener('click', () => {
     showCancelButton: true
   }).then(function(action) {
     console.log('callback:', action);
-    MessageBox('Clicked: ' + action);
+    MessageBox.alert('Clicked: ' + action);
   });
 });
 
@@ -57,4 +57,21 @@ document.querySelector('[showprompt]').addEventListener('click', () => {
     console.log(action);
     return;
   });
+});
+
+document.querySelector('[showprompt2]').addEventListener('click', () => {
+  MessageBox.prompt('Input your name: ', '', {
+      inputPlaceholder: '2-12 words',
+      inputValue: 'name',
+      inputValidator(value) {
+        if (value.length < 2 || value.length > 12) {
+          return 'length should be 2-12'
+        }
+      }
+    })
+    .then(function(value, action) {
+      console.log(value);
+      console.log(action);
+      return;
+    });
 });

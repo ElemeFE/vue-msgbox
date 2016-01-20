@@ -123,13 +123,17 @@ MessageBox.prompt('message').then(function(value, action) {
 | showConfirmButton | Boolean(default true) visible of confirm button. |
 | showCancelButton | Boolean(default false) visible of cancel button. |
 | confirmButtonText | The text of confirm button. |
+| confirmButtonPosition | (Default:right) The position of confirm button, default is right. |
+| confirmButtonHighlight | (Default:false) Highlight confirm button if confirmButtonHighlight is true. |
 | cancelButtonText | The text of cancel button. |
+| cancelButtonHighlight | (Default:false) Highlight cancel button if cancelButtonHighlight is true. |
 | confirmButtonClass | Extra className of confirm button. |
 | cancelButtonClass | Extra className of cancel button. |
 | showInput | Boolean(default false) visible of input. |
 | inputValue | value of input. |
 | inputPlaceholder | placeholder of input. |
 | inputPattern | Regexp(default null). validation pattern of input. |
+| inputValidator | validate function of input, if validator return a string, MessageBox will use it as inputErrorMessage. |
 | inputErrorMessage | error message when inputPattern test inputValue failed. |
 
 # Develop

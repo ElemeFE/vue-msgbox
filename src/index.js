@@ -9,6 +9,7 @@ var defaults = {
   inputValue: null,
   inputPlaceholder: '',
   inputPattern: null,
+  inputValidator: null,
   inputErrorMessage: '',
   showConfirmButton: true,
   showCancelButton: false,
