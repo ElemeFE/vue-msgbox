@@ -103,7 +103,7 @@
   }
 
   .msgbox-btns {
-    display: -webkit-box;
+    display: flex;
     height: 40px;
     line-height: 40px;
     text-align: center;
@@ -114,7 +114,7 @@
     display: block;
     background-color: #fff;
     border: 0;
-    -webkit-box-flex: 1;
+    flex: 1;
     margin: 0;
     border-radius: 0;
   }
