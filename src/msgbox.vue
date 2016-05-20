@@ -1,12 +1,12 @@
 <template>
-  <div class="msgbox" v-show="visible" transition="pop-bounce">
+  <div class="msgbox" v-if="rendered" v-show="visible" transition="pop-bounce">
     <div class="msgbox-header" v-if="title !== ''">
       <div class="msgbox-title">{{ title }}</div>
       <!--<div class="msgbox-close d-icon icon-close" @click="handleAction('close')"></div>-->
     </div>
     <div class="msgbox-content" v-if="message !== ''">
       <div class="msgbox-status d-icon {{ type ? 'icon-' + type : '' }}"></div>
-      <div class="msgbox-message">{{ message }}</div>
+      <div class="msgbox-message"><p>{{ message }}</p></div>
       <div class="msgbox-input" v-show="showInput">
         <input type="text" v-model="inputValue" :placeholder="inputPlaceholder" />
         <div class="msgbox-errormsg" :style="{ visibility: !!editorErrorMessage ? 'visible' : 'hidden' }">{{editorErrorMessage}}</div>
@@ -27,6 +27,10 @@
     border-radius: 3px;
     font-size: 16px;
     -webkit-user-select: none;
+    left: 50%;
+    top: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
   }
 
   .msgbox-header{
@@ -148,6 +152,60 @@
   .msgbox-btns-reverse .msgbox-cancel {
     border-right: 0;
   }
+
+  .pop-bounce-enter {
+    -webkit-animation: pop-bounce-in .3s cubic-bezier(0.3, 0, 0, 1.5);
+    animation: pop-bounce-in .3s cubic-bezier(0.3, 0, 0, 1.5);
+  }
+
+  .pop-bounce-leave {
+    -webkit-animation: pop-bounce-out .2s cubic-bezier(0.895, 0.03, 0.685, 0.22);
+    animation: pop-bounce-out .2s cubic-bezier(0.895, 0.03, 0.685, 0.22);
+  }
+
+  @-webkit-keyframes pop-bounce-in {
+    0% {
+      -webkit-transform: translate(-50%, -50%) scale(0.8);
+      transform: translate(-50%, -50%) scale(0.8);
+    }
+    100% {
+      -webkit-transform: translate(-50%, -50%) scale(1);
+      transform: translate(-50%, -50%) scale(1);
+    }
+  }
+
+  @keyframes pop-bounce-in {
+    0% {
+      -webkit-transform: translate(-50%, -50%) scale(0.8);
+      transform: translate(-50%, -50%) scale(0.8);
+    }
+    100% {
+      -webkit-transform: translate(-50%, -50%) scale(1);
+      transform: translate(-50%, -50%) scale(1);
+    }
+  }
+
+  @-webkit-keyframes pop-bounce-out {
+    0% {
+      -webkit-transform: translate(-50%, -50%) scale(1);
+      transform: translate(-50%, -50%) scale(1);
+    }
+    100% {
+      -webkit-transform: translate(-50%, -50%) scale(0.7);
+      transform: translate(-50%, -50%) scale(0.7);
+    }
+  }
+
+  @keyframes pop-bounce-out {
+    0% {
+      -webkit-transform: translate(-50%, -50%) scale(1);
+      transform: translate(-50%, -50%) scale(1);
+    }
+    100% {
+      -webkit-transform: translate(-50%, -50%) scale(0.7);
+      transform: translate(-50%, -50%) scale(0.7);
+    }
+  }
 </style>
 <style src="vue-popup/lib/popup.css"></style>
 
@@ -160,18 +218,16 @@
   export default {
     mixins: [ Popup ],
 
-    computed: {
-      popupOptions() {
-        return {
-          target: 'center',
-          modal: true,
-          updatePositionOnResize: true,
-          openAnimation: 'pop',
-          closeDelay: 1,
-          closeOnPressEscape: true
-          // ,closeOnClickModal: true
-        };
+    props: {
+      modal: {
+        default: true
       },
+      closeOnPressEscape: {
+        default: true
+      }
+    },
+
+    computed: {
       confirmButtonClasses() {
         var classes = 'msgbox-btn msgbox-confirm ' + this.confirmButtonClass;
         if (this.confirmButtonHighlight) {

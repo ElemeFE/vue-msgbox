@@ -96,6 +96,7 @@ var showNextMsg = function() {
           instance[prop] = options[prop];
         }
       }
+      instance.$appendTo(document.body);
 
       Vue.nextTick(() => {
         instance.open();
