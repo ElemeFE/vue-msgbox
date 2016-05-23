@@ -236,7 +236,7 @@
         return classes;
       },
       cancelButtonClasses() {
-        var classes = 'msgbox-btn msgbox-cancel ' + this.confirmButtonClass;
+        var classes = 'msgbox-btn msgbox-cancel ' + this.cancelButtonClass;
         if (this.cancelButtonHighlight) {
           classes += ' msgbox-cancel-highlight';
         }
