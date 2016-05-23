@@ -99,7 +99,7 @@ var showNextMsg = function() {
       instance.$appendTo(document.body);
 
       Vue.nextTick(() => {
-        instance.open();
+        instance.visible = true;
       });
     }
   }
@@ -185,7 +185,7 @@ MessageBox.prompt = function(message, title, options) {
 };
 
 MessageBox.close = function() {
-  instance.close();
+  instance.visible = false;
   msgQueue = [];
   currentMsg = null;
 };

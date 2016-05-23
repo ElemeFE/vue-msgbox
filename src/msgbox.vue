@@ -253,7 +253,7 @@
           return;
         }
         var callback = this.callback;
-        this.close();
+        this.visible = false;
         callback(action);
       },
 
