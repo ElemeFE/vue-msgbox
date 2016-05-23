@@ -10,7 +10,7 @@ Get source from npm.
 $ npm install vue-msgbox --save
 ```
 
-Supported UMD library and individual css file.
+Supported UMD library and individual CSS file.
 
 ```bash
 ./lib/
@@ -33,6 +33,11 @@ const MessageBox = VueMsgbox.default;
 
 // Import from src code for debugging or self building
 import MessageBox from 'vue-msgbox/src';
+```
+
+And import CSS file: 
+```javascript
+require('vue-msgbox/lib/vue-msgbox.css');
 ```
 
 # Usage

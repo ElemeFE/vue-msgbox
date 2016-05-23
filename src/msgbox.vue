@@ -1,6 +1,6 @@
 <template>
   <div class="msgbox-wrapper">
-    <div class="msgbox" v-if="rendered" v-show="visible" transition="pop-bounce" v-el:box>{{ boxHeight }}
+    <div class="msgbox" v-if="rendered" v-show="visible" transition="pop-bounce">
       <div class="msgbox-header" v-if="title !== ''">
         <div class="msgbox-title">{{ title }}</div>
         <!--<div class="msgbox-close d-icon icon-close" @click="handleAction('close')"></div>-->
@@ -22,18 +22,12 @@
 </template>
 
 <style>
-  .msgbox-wrapper {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    background-color: transparent;
-  }
-
   .msgbox {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
     background-color: #fff;
     width: 85%;
     border-radius: 3px;
@@ -174,45 +168,45 @@
 
   @-webkit-keyframes pop-bounce-in {
     0% {
-      -webkit-transform: scale(0.8);
-      transform: scale(0.8);
+      -webkit-transform: translate(-50%, -50%) scale(0.8);
+      transform: translate(-50%, -50%) scale(0.8);
     }
     100% {
-      -webkit-transform: scale(1);
-      transform: scale(1);
+      -webkit-transform: translate(-50%, -50%) scale(1);
+      transform: translate(-50%, -50%) scale(1);
     }
   }
 
   @keyframes pop-bounce-in {
     0% {
-      -webkit-transform: scale(0.8);
-      transform: scale(0.8);
+      -webkit-transform: translate(-50%, -50%) scale(0.8);
+      transform: translate(-50%, -50%) scale(0.8);
     }
     100% {
-      -webkit-transform: scale(1);
-      transform: scale(1);
+      -webkit-transform: translate(-50%, -50%) scale(1);
+      transform: translate(-50%, -50%) scale(1);
     }
   }
 
   @-webkit-keyframes pop-bounce-out {
     0% {
-      -webkit-transform: scale(1);
-      transform: scale(1);
+      -webkit-transform: translate(-50%, -50%) scale(1);
+      transform: translate(-50%, -50%) scale(1);
     }
     100% {
-      -webkit-transform: scale(0.7);
-      transform: scale(0.7);
+      -webkit-transform: translate(-50%, -50%) scale(0.7);
+      transform: translate(-50%, -50%) scale(0.7);
     }
   }
 
   @keyframes pop-bounce-out {
     0% {
-      -webkit-transform: scale(1);
-      transform: scale(1);
+      -webkit-transform: translate(-50%, -50%) scale(1);
+      transform: translate(-50%, -50%) scale(1);
     }
     100% {
-      -webkit-transform: scale(0.7);
-      transform: scale(0.7);
+      -webkit-transform: translate(-50%, -50%) scale(0.7);
+      transform: translate(-50%, -50%) scale(0.7);
     }
   }
 </style>
@@ -293,12 +287,6 @@
         if (this.$type === 'prompt') {
           this.validate();
         }
-      },
-
-      visible(val) {
-        setTimeout(() => {
-          this.$el.style.position = val ? 'absolute' : 'static';
-        }, 220);
       }
     },
 
