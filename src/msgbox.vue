@@ -1,36 +1,45 @@
 <template>
-  <div class="msgbox" v-if="rendered" v-show="visible" transition="pop-bounce">
-    <div class="msgbox-header" v-if="title !== ''">
-      <div class="msgbox-title">{{ title }}</div>
-      <!--<div class="msgbox-close d-icon icon-close" @click="handleAction('close')"></div>-->
-    </div>
-    <div class="msgbox-content" v-if="message !== ''">
-      <div class="msgbox-status d-icon {{ type ? 'icon-' + type : '' }}"></div>
-      <div class="msgbox-message"><p>{{ message }}</p></div>
-      <div class="msgbox-input" v-show="showInput">
-        <input type="text" v-model="inputValue" :placeholder="inputPlaceholder" />
-        <div class="msgbox-errormsg" :style="{ visibility: !!editorErrorMessage ? 'visible' : 'hidden' }">{{editorErrorMessage}}</div>
+  <div class="msgbox-wrapper">
+    <div class="msgbox" v-if="rendered" v-show="visible" transition="pop-bounce" v-el:box>{{ boxHeight }}
+      <div class="msgbox-header" v-if="title !== ''">
+        <div class="msgbox-title">{{ title }}</div>
+        <!--<div class="msgbox-close d-icon icon-close" @click="handleAction('close')"></div>-->
       </div>
-    </div>
-    <div class="msgbox-btns" :class="{ 'msgbox-btns-reverse': confirmButtonPosition === 'left' }">
-      <button class="{{ cancelButtonClasses }}" v-show="showCancelButton" @click="handleAction('cancel')">{{ cancelButtonText }}</button>
-      <button class="{{ confirmButtonClasses }}" v-show="showConfirmButton" @click="handleAction('confirm')">{{ confirmButtonText }}</button>
+      <div class="msgbox-content" v-if="message !== ''">
+        <div class="msgbox-status d-icon {{ type ? 'icon-' + type : '' }}"></div>
+        <div class="msgbox-message"><p>{{ message }}</p></div>
+        <div class="msgbox-input" v-show="showInput">
+          <input type="text" v-model="inputValue" :placeholder="inputPlaceholder" />
+          <div class="msgbox-errormsg" :style="{ visibility: !!editorErrorMessage ? 'visible' : 'hidden' }">{{editorErrorMessage}}</div>
+        </div>
+      </div>
+      <div class="msgbox-btns" :class="{ 'msgbox-btns-reverse': confirmButtonPosition === 'left' }">
+        <button class="{{ cancelButtonClasses }}" v-show="showCancelButton" @click="handleAction('cancel')">{{ cancelButtonText }}</button>
+        <button class="{{ confirmButtonClasses }}" v-show="showConfirmButton" @click="handleAction('confirm')">{{ confirmButtonText }}</button>
+      </div>
     </div>
   </div>
 </template>
 
 <style>
+  .msgbox-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: transparent;
+  }
+
   .msgbox {
-    position: fixed;
     background-color: #fff;
-    width: 90%;
+    width: 85%;
     border-radius: 3px;
     font-size: 16px;
     -webkit-user-select: none;
-    left: 50%;
-    top: 50%;
-    -webkit-transform: translate(-50%, -50%);
-    transform: translate(-50%, -50%);
+    overflow: hidden;
   }
 
   .msgbox-header{
@@ -165,45 +174,45 @@
 
   @-webkit-keyframes pop-bounce-in {
     0% {
-      -webkit-transform: translate(-50%, -50%) scale(0.8);
-      transform: translate(-50%, -50%) scale(0.8);
+      -webkit-transform: scale(0.8);
+      transform: scale(0.8);
     }
     100% {
-      -webkit-transform: translate(-50%, -50%) scale(1);
-      transform: translate(-50%, -50%) scale(1);
+      -webkit-transform: scale(1);
+      transform: scale(1);
     }
   }
 
   @keyframes pop-bounce-in {
     0% {
-      -webkit-transform: translate(-50%, -50%) scale(0.8);
-      transform: translate(-50%, -50%) scale(0.8);
+      -webkit-transform: scale(0.8);
+      transform: scale(0.8);
     }
     100% {
-      -webkit-transform: translate(-50%, -50%) scale(1);
-      transform: translate(-50%, -50%) scale(1);
+      -webkit-transform: scale(1);
+      transform: scale(1);
     }
   }
 
   @-webkit-keyframes pop-bounce-out {
     0% {
-      -webkit-transform: translate(-50%, -50%) scale(1);
-      transform: translate(-50%, -50%) scale(1);
+      -webkit-transform: scale(1);
+      transform: scale(1);
     }
     100% {
-      -webkit-transform: translate(-50%, -50%) scale(0.7);
-      transform: translate(-50%, -50%) scale(0.7);
+      -webkit-transform: scale(0.7);
+      transform: scale(0.7);
     }
   }
 
   @keyframes pop-bounce-out {
     0% {
-      -webkit-transform: translate(-50%, -50%) scale(1);
-      transform: translate(-50%, -50%) scale(1);
+      -webkit-transform: scale(1);
+      transform: scale(1);
     }
     100% {
-      -webkit-transform: translate(-50%, -50%) scale(0.7);
-      transform: translate(-50%, -50%) scale(0.7);
+      -webkit-transform: scale(0.7);
+      transform: scale(0.7);
     }
   }
 </style>
@@ -236,7 +245,7 @@
         return classes;
       },
       cancelButtonClasses() {
-        var classes = 'msgbox-btn msgbox-cancel ' + this.confirmButtonClass;
+        var classes = 'msgbox-btn msgbox-cancel ' + this.cancelButtonClass;
         if (this.cancelButtonHighlight) {
           classes += ' msgbox-cancel-highlight';
         }
@@ -284,6 +293,12 @@
         if (this.$type === 'prompt') {
           this.validate();
         }
+      },
+
+      visible(val) {
+        setTimeout(() => {
+          this.$el.style.position = val ? 'absolute' : 'static';
+        }, 220);
       }
     },
 

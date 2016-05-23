@@ -9,7 +9,12 @@ options.output = {
   path: './lib'
 };
 options.externals = {
-  vue: 'Vue'
+  vue: {
+    root: 'Vue',
+    commonjs: 'vue',
+    commonjs2: 'vue',
+    amd: 'vue'
+  }
 };
 options.plugins = [new ExtractTextPlugin('vue-msgbox.css')];
 options.vue.loaders.css = ExtractTextPlugin.extract('style', 'css');
