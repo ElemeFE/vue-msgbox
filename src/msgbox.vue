@@ -26,8 +26,8 @@
     position: fixed;
     top: 50%;
     left: 50%;
-    -webkit-transform: translate(-50%, -50%);
-    transform: translate(-50%, -50%);
+    -webkit-transform: translate3d(-50%, -50%, 0);
+    transform: translate3d(-50%, -50%, 0);
     background-color: #fff;
     width: 85%;
     border-radius: 3px;
@@ -168,45 +168,45 @@
 
   @-webkit-keyframes pop-bounce-in {
     0% {
-      -webkit-transform: translate(-50%, -50%) scale(0.8);
-      transform: translate(-50%, -50%) scale(0.8);
+      -webkit-transform: translate3d(-50%, -50%, 0) scale(0.8);
+      transform: translate3d(-50%, -50%, 0) scale(0.8);
     }
     100% {
-      -webkit-transform: translate(-50%, -50%) scale(1);
-      transform: translate(-50%, -50%) scale(1);
+      -webkit-transform: translate3d(-50%, -50%, 0) scale(1);
+      transform: translate3d(-50%, -50%, 0) scale(1);
     }
   }
 
   @keyframes pop-bounce-in {
     0% {
-      -webkit-transform: translate(-50%, -50%) scale(0.8);
-      transform: translate(-50%, -50%) scale(0.8);
+      -webkit-transform: translate3d(-50%, -50%, 0) scale(0.8);
+      transform: translate3d(-50%, -50%, 0) scale(0.8);
     }
     100% {
-      -webkit-transform: translate(-50%, -50%) scale(1);
-      transform: translate(-50%, -50%) scale(1);
+      -webkit-transform: translate3d(-50%, -50%, 0) scale(1);
+      transform: translate3d(-50%, -50%, 0) scale(1);
     }
   }
 
   @-webkit-keyframes pop-bounce-out {
     0% {
-      -webkit-transform: translate(-50%, -50%) scale(1);
-      transform: translate(-50%, -50%) scale(1);
+      -webkit-transform: translate3d(-50%, -50%, 0) scale(1);
+      transform: translate3d(-50%, -50%, 0) scale(1);
     }
     100% {
-      -webkit-transform: translate(-50%, -50%) scale(0.7);
-      transform: translate(-50%, -50%) scale(0.7);
+      -webkit-transform: translate3d(-50%, -50%, 0) scale(0.7);
+      transform: translate3d(-50%, -50%, 0) scale(0.7);
     }
   }
 
   @keyframes pop-bounce-out {
     0% {
-      -webkit-transform: translate(-50%, -50%) scale(1);
-      transform: translate(-50%, -50%) scale(1);
+      -webkit-transform: translate3d(-50%, -50%, 0) scale(1);
+      transform: translate3d(-50%, -50%, 0) scale(1);
     }
     100% {
-      -webkit-transform: translate(-50%, -50%) scale(0.7);
-      transform: translate(-50%, -50%) scale(0.7);
+      -webkit-transform: translate3d(-50%, -50%, 0) scale(0.7);
+      transform: translate3d(-50%, -50%, 0) scale(0.7);
     }
   }
 </style>
