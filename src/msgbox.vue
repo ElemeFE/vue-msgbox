@@ -125,9 +125,15 @@
     margin: 0;
     border-radius: 0;
   }
+
   .msgbox-btn:active {
     background-color: #3492e9;
     color: #fff;
+    outline: none;
+  }
+
+  .msgbox-btn:focus {
+    outline: none;
   }
 
   .msgbox-confirm {
