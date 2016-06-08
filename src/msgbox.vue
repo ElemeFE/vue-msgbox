@@ -34,6 +34,8 @@
     font-size: 16px;
     -webkit-user-select: none;
     overflow: hidden;
+    opacity: 1;
+    backface-visibility: hidden;
   }
 
   .msgbox-header{
@@ -162,58 +164,18 @@
     border-right: 0;
   }
 
+  .pop-bounce-transition {
+    transition: .2s .1s;
+  }
+
   .pop-bounce-enter {
-    -webkit-animation: pop-bounce-in .3s cubic-bezier(0.3, 0, 0, 1.5);
-    animation: pop-bounce-in .3s cubic-bezier(0.3, 0, 0, 1.5);
+    opacity: 0;
+    transform: translate3d(-50%, -50%, 0) scale(0.7);
   }
 
   .pop-bounce-leave {
-    -webkit-animation: pop-bounce-out .2s cubic-bezier(0.895, 0.03, 0.685, 0.22);
-    animation: pop-bounce-out .2s cubic-bezier(0.895, 0.03, 0.685, 0.22);
-  }
-
-  @-webkit-keyframes pop-bounce-in {
-    0% {
-      -webkit-transform: translate3d(-50%, -50%, 0) scale(0.8);
-      transform: translate3d(-50%, -50%, 0) scale(0.8);
-    }
-    100% {
-      -webkit-transform: translate3d(-50%, -50%, 0) scale(1);
-      transform: translate3d(-50%, -50%, 0) scale(1);
-    }
-  }
-
-  @keyframes pop-bounce-in {
-    0% {
-      -webkit-transform: translate3d(-50%, -50%, 0) scale(0.8);
-      transform: translate3d(-50%, -50%, 0) scale(0.8);
-    }
-    100% {
-      -webkit-transform: translate3d(-50%, -50%, 0) scale(1);
-      transform: translate3d(-50%, -50%, 0) scale(1);
-    }
-  }
-
-  @-webkit-keyframes pop-bounce-out {
-    0% {
-      -webkit-transform: translate3d(-50%, -50%, 0) scale(1);
-      transform: translate3d(-50%, -50%, 0) scale(1);
-    }
-    100% {
-      -webkit-transform: translate3d(-50%, -50%, 0) scale(0.7);
-      transform: translate3d(-50%, -50%, 0) scale(0.7);
-    }
-  }
-
-  @keyframes pop-bounce-out {
-    0% {
-      -webkit-transform: translate3d(-50%, -50%, 0) scale(1);
-      transform: translate3d(-50%, -50%, 0) scale(1);
-    }
-    100% {
-      -webkit-transform: translate3d(-50%, -50%, 0) scale(0.7);
-      transform: translate3d(-50%, -50%, 0) scale(0.7);
-    }
+    opacity: 0;
+    transform: translate3d(-50%, -50%, 0) scale(0.9);
   }
 </style>
 <style src="vue-popup/lib/popup.css"></style>
