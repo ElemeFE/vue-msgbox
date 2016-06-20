@@ -9,7 +9,7 @@
         <div class="msgbox-status d-icon {{ type ? 'icon-' + type : '' }}"></div>
         <div class="msgbox-message"><p>{{ message }}</p></div>
         <div class="msgbox-input" v-show="showInput">
-          <input type="text" v-model="inputValue" :placeholder="inputPlaceholder" />
+          <input type="text" v-model="inputValue" :placeholder="inputPlaceholder" v-el:input />
           <div class="msgbox-errormsg" :style="{ visibility: !!editorErrorMessage ? 'visible' : 'hidden' }">{{editorErrorMessage}}</div>
         </div>
       </div>
@@ -67,6 +67,10 @@
     border-radius: 5px;
     padding: 4px 5px;
     width: 100%;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    outline: none;
   }
 
   .msgbox-errormsg {
@@ -255,6 +259,14 @@
         if (this.$type === 'prompt') {
           this.validate();
         }
+      }
+    },
+
+    ready() {
+      if (this.$type === 'prompt') {
+        setTimeout(() => {
+          this.$els.input.focus();
+        }, 500);
       }
     },
 
