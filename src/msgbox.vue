@@ -259,14 +259,16 @@
         if (this.$type === 'prompt') {
           this.validate();
         }
-      }
-    },
+      },
 
-    ready() {
-      if (this.$type === 'prompt') {
-        setTimeout(() => {
-          this.$els.input.focus();
-        }, 500);
+      visible(val) {
+        if (val && this.$type === 'prompt') {
+          setTimeout(() => {
+            if (this.$els.input) {
+              this.$els.input.focus();
+            }
+          }, 500);
+        }
       }
     },
 
