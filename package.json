@@ -42,6 +42,7 @@
     "webpack-dev-server": "^1.14.0"
   },
   "dependencies": {
+    "vue": "^1.0.25",
     "vue-popup": "^0.1.8"
   }
 }
