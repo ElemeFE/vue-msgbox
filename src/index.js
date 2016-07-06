@@ -66,7 +66,7 @@ var initInstance = function() {
         if ($type === 'confirm' || $type === 'prompt') {
           if (action === 'confirm') {
             if (instance.showInput) {
-              currentMsg.resolve(instance.inputValue, action);
+              currentMsg.resolve({ value: instance.inputValue, action });
             } else {
               currentMsg.resolve(action);
             }
