@@ -263,11 +263,11 @@
 
       visible(val) {
         if (val && this.$type === 'prompt') {
-          setTimeout(() => {
+          Vue.nextTick(() => {
             if (this.$els.input) {
               this.$els.input.focus();
             }
-          }, 500);
+          });
         }
       }
     },
