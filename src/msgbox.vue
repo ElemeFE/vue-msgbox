@@ -197,6 +197,9 @@
       modal: {
         default: true
       },
+      lockScroll: {
+        default: false
+      },
       closeOnPressEscape: {
         default: true
       }
