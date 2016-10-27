@@ -5,6 +5,7 @@ var defaults = {
   title: '',
   message: '',
   type: '',
+  inputType: 'text',
   showInput: false,
   lockScroll: false,
   inputValue: null,

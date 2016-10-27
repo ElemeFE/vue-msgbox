@@ -9,7 +9,7 @@
         <div class="msgbox-status d-icon {{ type ? 'icon-' + type : '' }}"></div>
         <div class="msgbox-message"><p>{{ message }}</p></div>
         <div class="msgbox-input" v-show="showInput">
-          <input type="text" v-model="inputValue" :placeholder="inputPlaceholder" v-el:input />
+          <input :type="inputType" v-model="inputValue" :placeholder="inputPlaceholder" v-el:input />
           <div class="msgbox-errormsg" :style="{ visibility: !!editorErrorMessage ? 'visible' : 'hidden' }">{{editorErrorMessage}}</div>
         </div>
       </div>
@@ -282,6 +282,7 @@
         type: '',
         showInput: false,
         inputValue: null,
+        inputType: 'text',
         inputPlaceholder: '',
         inputPattern: null,
         inputValidator: null,
