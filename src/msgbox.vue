@@ -7,7 +7,7 @@
       </div>
       <div class="msgbox-content" v-if="message !== ''">
         <div class="msgbox-status d-icon {{ type ? 'icon-' + type : '' }}"></div>
-        <div class="msgbox-message"><p>{{ message }}</p></div>
+        <div class="msgbox-message">{{{ message }}}</div>
         <div class="msgbox-input" v-show="showInput">
           <input :type="inputType" v-model="inputValue" :placeholder="inputPlaceholder" v-el:input />
           <div class="msgbox-errormsg" :style="{ visibility: !!editorErrorMessage ? 'visible' : 'hidden' }">{{editorErrorMessage}}</div>
