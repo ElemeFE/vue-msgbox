@@ -1,6 +1,6 @@
 {
   "name": "vue-msgbox",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "A message box (like Sweet Alert) for vue.js.",
   "main": "lib/vue-msgbox.js",
   "scripts": {
